@@ -25,7 +25,10 @@ export const logUserOut = history => {
 export const darkModeVar = makeVar(false);
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000/graphql",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://nomadcoffee-backend-byjjw.herokuapp.com/graphql"
+      : "http://localhost:5000/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
